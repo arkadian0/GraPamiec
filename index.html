@@ -1,0 +1,211 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html >
+<head>
+<link href="https://fonts.googleapis.com/css?family=Abel|Encode+Sans+Semi+Condensed|Raleway" rel="stylesheet" />
+ <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+ <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-2" />
+<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>
+<link rel="stylesheet" href="gra.css" type="text/css"/>
+<script type="text/javascript">
+
+function wybor(x)
+{
+document.getElementById("imgName").src="../newImgSrc.jpg";
+}
+
+var obrazki= new Array ("obrazek1.jpg" , "obrazek2.jpg" , "obrazek3.jpg" , "obrazek4.jpg","obrazek5.jpg","obrazek6.jpg","obrazek7.jpg","obrazek8.jpg","obrazek9.jpg","obrazek10.jpg","obrazek11.jpg","obrazek12.jpg", "obrazek1.jpg" , "obrazek2.jpg" , "obrazek3.jpg" , "obrazek4.jpg","obrazek5.jpg","obrazek6.jpg","obrazek7.jpg","obrazek8.jpg","obrazek9.jpg","obrazek10.jpg","obrazek11.jpg","obrazek12.jpg");
+var tablica = document.getElementById("tablicagry");
+var nameclass = document.getElementsByClassName("elementtablicy");
+var nameclassnew = document.getElementsByClassName("nowezdjecie");
+var sprawdzpoprawnosc = new Array(23);
+var licznik =0;
+var score = 0;
+var l1;
+var l2;
+los();
+ function los() 
+ {
+ var n =23;
+ for (var x=0; x<24; x++) { //pętla po wszystkich td
+    var number = Math.floor(Math.random()*obrazki.length);
+      
+    sprawdzpoprawnosc[x]=obrazki[number];
+    obrazki[number]=obrazki[n];
+
+	obrazki.splice(n,n);
+	n--;
+      
+    }
+
+}
+
+function zmienzdjecie(y)
+{
+	
+
+var wynik = document.getElementById("wynik");
+var zdjecie = document.getElementById(''+y);
+
+licznik++;
+
+if(licznik == 1)
+{
+l1 = y;
+
+
+$(zdjecie).fadeOut(5, function(){
+	
+$(zdjecie).attr("src",""+sprawdzpoprawnosc[l1]);
+ $(zdjecie).fadeIn(1000);
+           
+     
+       
+    });
+
+   
+}
+if(licznik ==2)
+{
+score++;
+wynik.innerHTML = score;
+l2=y;	
+$(zdjecie).fadeOut(5, function(){
+	
+$(zdjecie).attr("src",""+sprawdzpoprawnosc[l2]);
+ $(zdjecie).fadeIn(1000);
+           
+     
+       
+    });
+if(sprawdzpoprawnosc[l1]==sprawdzpoprawnosc[l2])
+{
+	
+var zdj1 = document.getElementById(''+l1);
+var zdj2 = document.getElementById(''+l2);
+
+for(var i =0 ; i<24 ; i++)
+{
+	if(i!=l1 || i!=l2)
+	{
+		
+		document.getElementById(''+i).style.pointerEvents = 'none';
+	}
+}
+setTimeout(function()
+{
+$(zdj1).fadeOut(500, function(){
+	
+zdj1.style.visibility='hidden';
+$(zdj1).fadeIn(500);
+});
+ 	$(zdj2).fadeOut(500, function(){
+	
+zdj2.style.visibility='hidden';
+$(zdj2).fadeIn(500);
+});
+for(var i =0;i<24;i++)
+	{
+	
+document.getElementById(''+i).style.pointerEvents = 'visiblePainted';
+
+	 }
+	 licznik=0;
+ 	}, 1000);
+var snd = new Audio("dobrze.mp3"); // buffers automatically when created
+snd.play();
+snd.currentTime=0
+}
+
+else
+{
+
+var zdjecie1 = document.getElementById(''+l1);
+var zdjecie2 = document.getElementById(''+l2);
+
+setTimeout(function()
+{
+	for(var i =0 ; i<24 ; i++)
+{
+	if(i!=l1 || i!=l2)
+	{
+		
+		document.getElementById(''+i).style.pointerEvents = 'none';
+	}
+}
+$(zdjecie1).fadeOut(500, function(){
+	
+$(zdjecie1).attr("src","znakzapytania.jpg");
+$(zdjecie1).fadeIn(500);
+});
+$(zdjecie2).fadeOut(500, function(){
+	
+$(zdjecie2).attr("src","znakzapytania.jpg");
+$(zdjecie2).fadeIn(500);
+});
+
+for(var i =0;i<24;i++)
+	{
+	
+document.getElementById(''+i).style.pointerEvents = 'visiblePainted';
+
+	 }
+ 
+	licznik=0;
+ }, 1000);
+var snd = new Audio("zle.mp3"); // buffers automatically when created
+snd.play();
+snd.currentTime=0
+}
+
+ } 
+ }    
+</script>
+
+
+
+<body>
+<h1><font color="420109">M</font>EMORY <font color="420109">G</font>AME</h1>
+<h3>Score</h3>
+<b id="wynik">0</b>
+<h3 id="bestplayer">Best Player </h3>
+<div class="planszagry">
+<div id="planszagrym">
+<table id="tablicagry" border="1" cellpadding="-6">
+<tr>
+<td class ="td1"><img id="0" class="znakzapytania" src="znakzapytania.jpg" onclick="zmienzdjecie(0);"/> </td>
+<td class ="td1"><img id="1" class="znakzapytania" src="znakzapytania.jpg" onclick="zmienzdjecie(1);" /></td>
+<td class ="td1"><img id="2" class="znakzapytania" src="znakzapytania.jpg" onclick="zmienzdjecie(2);"/></td>
+<td class ="td1"><img id="3" onclick="zmienzdjecie(3);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="4" onclick="zmienzdjecie(4);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="5" onclick="zmienzdjecie(5);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+</tr>
+<tr>
+<td class ="td1" ><img id="6" onclick="zmienzdjecie(6);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="7" onclick="zmienzdjecie(7);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="8" onclick="zmienzdjecie(8);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="9" onclick="zmienzdjecie(9);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="10" onclick="zmienzdjecie(10);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="11" onclick="zmienzdjecie(11);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+</tr>
+<tr>
+<td class ="td1"><img id="12" onclick="zmienzdjecie(12);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="13" onclick="zmienzdjecie(13);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="14" onclick="zmienzdjecie(14);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="15" onclick="zmienzdjecie(15);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="16" onclick="zmienzdjecie(16);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="17" onclick="zmienzdjecie(17);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+</tr>
+<tr>
+<td class ="td1"><img id="18" onclick="zmienzdjecie(18);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="19" onclick="zmienzdjecie(19);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="20" onclick="zmienzdjecie(20);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="21" onclick="zmienzdjecie(21);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="22" onclick="zmienzdjecie(22);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+<td class ="td1"><img id="23" onclick="zmienzdjecie(23);" class="znakzapytania" src="znakzapytania.jpg"/></td>
+</tr>
+</table>
+</div>
+</div>
+</body>
+</head>
+</html>
